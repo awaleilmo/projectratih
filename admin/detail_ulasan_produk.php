@@ -8,13 +8,13 @@ $list_rating = $db_connect->query("SELECT * FROM rating WHERE id_produk = '" . $
 $nomor = 1;
 
 if (isset($_GET['display'])) {
-    if ($db_connect->query("UPDATE rating SET display = 1 WHERE id_produk = '" . $_GET['display'] . "'")) {
+    if ($db_connect->query("UPDATE rating SET display = '1' WHERE id = '" . $_GET['display'] . "'")) {
         echo "<script>alert('berhasil');location.href='detail_ulasan_produk?id=$id_produk'</script>";
     }
 }
 
 if (isset($_GET['undisplay'])) {
-    if ($db_connect->query("UPDATE rating SET display = 0 WHERE id_produk = '" . $_GET['undisplay'] . "'")) {
+    if ($db_connect->query("UPDATE rating SET display = '0' WHERE id = '" . $_GET['undisplay'] . "'")) {
         echo "<script>alert('berhasil');location.href='detail_ulasan_produk?id=$id_produk'</script>";
     }
 }
@@ -120,7 +120,7 @@ License: For each use you must have a valid license purchased only from above li
                                 <!--begin::Page title-->
                                 <div class="page-title d-flex flex-column justify-content-center flex-wrap me-3">
                                     <!--begin::Title-->
-                                    <h1 class="page-heading d-flex text-dark fw-bold fs-3 flex-column justify-content-center my-0">Ulasan</h1>
+                                    <h1 class="page-heading d-flex text-dark fw-bold fs-3 flex-column justify-content-center my-0">Ulasan & Rating</h1>
                                     <!--end::Title-->
                                     <!--begin::Breadcrumb-->
                                     <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
@@ -135,7 +135,7 @@ License: For each use you must have a valid license purchased only from above li
                                         </li>
                                         <!--end::Item-->
                                         <!--begin::Item-->
-                                        <li class="breadcrumb-item text-muted">Ulasan</li>
+                                        <li class="breadcrumb-item text-muted">Ulasan & Rating</li>
                                         <!--end::Item-->
                                     </ul>
                                     <!--end::Breadcrumb-->

@@ -348,7 +348,7 @@ $page = basename($path);
                                 <span class="path5"></span>
                             </i>
                         </span>
-                        <span class="menu-title">Ulasan</span>
+                        <span class="menu-title">Ulasan & Rating</span>
                     </a>
                 </div>
                 <!--end:Menu item-->

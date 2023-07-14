@@ -176,7 +176,7 @@ License: For each use you must have a valid license purchased only from above li
                                                                             $belum_beri_rating = belum_beri_rating($detail['id_produk'], $_SESSION['id_user'], $pesanan['nomor_invoice']);
 
                                                                             // Jika keduanya true, atur variabel penanda menjadi true dan hentikan perulangan
-                                                                            if ($is_hari_ini_lebih_besar || $belum_beri_rating) {
+                                                                            if ($belum_beri_rating) {
                                                                                 $show_rating_button = true;
                                                                                 break;
                                                                             }
@@ -184,7 +184,7 @@ License: For each use you must have a valid license purchased only from above li
 
                                                                         // Tampilkan anchor untuk halaman beri rating jika variabel penanda true
                                                                         if ($show_rating_button) { ?>
-                                                                            <a href="rating?give=<?= $pesanan['nomor_invoice'] ?>" class="btn btn-sm btn-success">Beri rating</a>
+                                                                            <a href="rating?give=<?= $pesanan['nomor_invoice'] ?>" class="btn btn-sm btn-success">Beri Rating & Ulasan</a>
                                                                     <?php }
                                                                     }
                                                                     ?>

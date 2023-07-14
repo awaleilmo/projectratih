@@ -1,7 +1,9 @@
 <?php
 require_once 'functions/koneksi.php';
 
-session_start();
+if(!isset($_SESSION)) {
+    session_start();
+}
 session_unset();
 unset($_SESSION['id_user']);
 unset($_SESSION['is_admin']);
@@ -33,7 +35,7 @@ if (isset($_POST['register'])) {
         $id = $db_connect->query("SELECT AUTO_INCREMENT FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'project_ratih' AND TABLE_NAME = 'user'")->fetch_assoc()['AUTO_INCREMENT'];
 
 
-        $sql = $db_connect->query("INSERT INTO user VALUES ('$id','$nama','$username','$password', '$email', '$alamat', '$jenis_kelamin', '$tgl_lahir','$no_telpon','default.jpg','0')");
+        $sql = $db_connect->query("INSERT INTO user VALUES ('$id','$nama','$username','$password', '$email', '$alamat', '$jenis_kelamin', '$tgl_lahir','$no_telpon','default.jpg','0','0')");
     
         if ($sql) {
     
