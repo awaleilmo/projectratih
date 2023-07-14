@@ -170,15 +170,13 @@ License: For each use you must have a valid license purchased only from above li
 
                                                                         foreach ($detail_pesanan as $detail) {
                                                                             $tanggal_acara = $detail['tgl_acara'];
-
                                                                             // Pengecekan apakah hari ini lebih besar dari tanggal acara
                                                                             $is_hari_ini_lebih_besar = is_hari_ini_lebih_besar($tanggal_acara);
-
                                                                             // Pengecekan apakah produk belum dirating
                                                                             $belum_beri_rating = belum_beri_rating($detail['id_produk'], $_SESSION['id_user'], $pesanan['nomor_invoice']);
 
                                                                             // Jika keduanya true, atur variabel penanda menjadi true dan hentikan perulangan
-                                                                            if ($is_hari_ini_lebih_besar && $belum_beri_rating) {
+                                                                            if ($is_hari_ini_lebih_besar || $belum_beri_rating) {
                                                                                 $show_rating_button = true;
                                                                                 break;
                                                                             }
