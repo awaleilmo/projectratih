@@ -133,7 +133,7 @@ if (isset($_POST['login'])) {
                             </div>
                             <!--end::Sign up-->
                             <div class="text-gray-500 text-center fw-semibold mt-3">
-                                <a href="index" class="link-primary">Back to landing page</a>
+                                <a href="index" class="link-primary">Back to Homepage</a>
                             </div>
                         </form>
                         <!--end::Form-->

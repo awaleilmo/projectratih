@@ -5,6 +5,12 @@ $list_komplain = $db_connect->query("SELECT komplain.*, user.nama, user.no_telpo
 
 $timeline_komplain = $db_connect->query("SELECT * FROM timeline_komplain WHERE id_komplain = '" . $_GET['id_komplain'] . "'");
 
+$check = $db_connect->query("SELECT count(*) as nums FROM timeline_komplain WHERE id_komplain = '" . $_GET['id_komplain'] . "'")->fetch_assoc();
+
+if($check['nums'] <= 0) {
+    header('Location: komplain');
+}
+
 if (isset($_GET['finish']) && $_GET['finish'] == 'true') {
     $id_komplain = $_GET['id_komplain'];
     $date = date("Y-m-d H:i:s");
@@ -38,7 +44,6 @@ if (isset($_POST['tolak_komplain'])) {
         echo "<script>alert('berhasil');location.href='detail_komplain?id_komplain=$id_komplain'</script>";
     }
 }
-
 ?>
 <!DOCTYPE html>
 <!--

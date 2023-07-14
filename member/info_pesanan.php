@@ -280,7 +280,7 @@ License: For each use you must have a valid license purchased only from above li
                                             <!-- begin::Actions-->
                                             <div class="my-1 me-5">
                                                 <!-- begin::Pint-->
-                                                <a href="print_invoice.php?pesanan=<?= $_GET['pesanan'] ?>" class="btn btn-success my-1 me-12">Print Invoice</a>
+                                                <!-- <a href="print_invoice.php?pesanan=<?= $_GET['pesanan'] ?>" class="btn btn-success my-1 me-12">Print Invoice</a> -->
                                                 <a href="add_komplain.php?pesanan=<?= $_GET['pesanan'] ?>" class="my-1 me-12">Komplain</a>
                                                 <!-- end::Pint-->
                                                 <!-- begin::Download-->
