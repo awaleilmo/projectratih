@@ -1,6 +1,6 @@
 <?php
 require_once '../functions/admin_service.php';
-$list_pelanggan = $_SESSION['role'] == 1 ? $db_connect->query("SELECT * FROM user WHERE is_admin = 0") : $db_connect->query("SELECT * FROM user WHERE is_admin = 1");
+$list_pelanggan = $_SESSION['role'] == 1 ? $db_connect->query("SELECT * FROM user WHERE is_admin = 0") : $db_connect->query("SELECT * FROM user WHERE is_admin = 1 AND not role = 2");
 
 ?>
 <!DOCTYPE html>

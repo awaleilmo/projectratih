@@ -249,7 +249,7 @@ License: For each use you must have a valid license purchased only from above li
                                                                 <!--begin::Timeline line-->
                                                                 <div class="timeline-line w-40px"></div>
                                                                 <!--end::Timeline line-->
-
+                                                                <?php if($_SESSION['role'] == 1){ ?>
                                                                 <?php if ($timeline['status'] == 'komplain dibuat') : ?>
                                                                     <!--begin::Timeline icon-->
                                                                     <div class="timeline-icon symbol symbol-circle symbol-40px me-4">
@@ -299,7 +299,7 @@ License: For each use you must have a valid license purchased only from above li
                                                                     </div>
                                                                     <!--end::Timeline icon-->
                                                                 <?php endif; ?>
-
+                                                                <?php } ?>
                                                                 <!--begin::Timeline content-->
                                                                 <div class="timeline-content mb-10 mt-n1">
                                                                     <!--begin::Timeline heading-->

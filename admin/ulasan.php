@@ -156,7 +156,7 @@ License: For each use you must have a valid license purchased only from above li
                                         <div class="card-header">
                                             <div class="card-title">
                                                 <h3 class="card-label">
-                                                    Data feedback paket
+                                                    Data ulasan paket
                                                 </h3>
                                             </div>
                                         </div>

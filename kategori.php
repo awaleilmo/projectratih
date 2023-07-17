@@ -181,8 +181,6 @@ $list_galery = $db_connect->query("SELECT * FROM galery WHERE jenis_produk = '$i
                 <div class="section-title">
                     <h2>Contact</h2>
                     <h3><span>Contact Us</span></h3>
-                    <p>Ut possimus qui ut temporibus culpa velit eveniet modi omnis est adipisci expedita at voluptas atque vitae
-                        autem.</p>
                 </div>
 
                 <div class="row" data-aos="fade-up" data-aos-delay="100">
@@ -190,7 +188,7 @@ $list_galery = $db_connect->query("SELECT * FROM galery WHERE jenis_produk = '$i
                         <div class="info-box mb-4">
                             <i class="bx bx-map"></i>
                             <h3>Our Address</h3>
-                            <p>A108 Adam Street, New York, NY 535022</p>
+                            <p>Saruni, Majasari, Pandeglang, Banten 42219, Indonesia</p>
                         </div>
                     </div>
 
@@ -198,7 +196,7 @@ $list_galery = $db_connect->query("SELECT * FROM galery WHERE jenis_produk = '$i
                         <div class="info-box  mb-4">
                             <i class="bx bx-envelope"></i>
                             <h3>Email Us</h3>
-                            <p>contact@example.com</p>
+                            <p>wldproject@gmail.cvom</p>
                         </div>
                     </div>
 
@@ -206,7 +204,7 @@ $list_galery = $db_connect->query("SELECT * FROM galery WHERE jenis_produk = '$i
                         <div class="info-box  mb-4">
                             <i class="bx bx-phone-call"></i>
                             <h3>Call Us</h3>
-                            <p>+1 5589 55488 55</p>
+                            <p>+62 822 9999 3475</p>
                         </div>
                     </div>
 

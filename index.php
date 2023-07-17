@@ -3,7 +3,7 @@ require_once 'functions/general_service.php';
 
 $list_kategori = $db_connect->query("SELECT * FROM jenis_produk");
 $list_galery = $db_connect->query("SELECT * FROM galery");
-$list_rating_4_keatas = $db_connect->query("SELECT * FROM rating WHERE rating > 3 AND display = 1");
+$list_rating_4_keatas = $db_connect->query("SELECT * FROM rating WHERE display = 1");
 
 ?>
 <!DOCTYPE html>

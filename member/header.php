@@ -193,6 +193,12 @@ $jumlah_pesan_belum_dibaca = $db_connect->query("SELECT * FROM pesan WHERE id_us
                     <!--end::Menu-->
                 </div>
                 <!--end::Theme mode-->
+                <div class="app-navbar-item ms-1 ms-md-3">
+                    <a href="../index" class="btn btn-icon btn-custom btn-icon-muted btn-active-light btn-active-color-primary w-30px h-30px w-md-40px h-md-40px position-relative">
+                        <i class="ki-duotone ki-home fs-2 fs-lg">
+                        </i>
+                    </a>
+                </div>
                 <!--begin::User menu-->
                 <div class="app-navbar-item ms-1 ms-md-3" id="kt_header_user_menu_toggle">
                     <!--begin::Menu wrapper-->

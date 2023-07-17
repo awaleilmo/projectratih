@@ -129,7 +129,7 @@ if (isset($_POST['login'])) {
                             <!--end::Submit button-->
                             <!--begin::Sign up-->
                             <div class="text-gray-500 text-center fw-semibold fs-6">Not a Member yet?
-                                <a href="register" class="link-primary">Sign up</a>
+                                <a href="register" class="link-primary">Register</a>
                             </div>
                             <!--end::Sign up-->
                             <div class="text-gray-500 text-center fw-semibold mt-3">

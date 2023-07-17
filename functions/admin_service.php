@@ -282,7 +282,7 @@ function ubah_galery($data)
             // Menentukan nama file baru
             $fileName = basename($file['name']);
             $fileExtension = pathinfo($fileName, PATHINFO_EXTENSION);
-            $newFileName = $id . '.' . $fileExtension;
+            $newFileName = $fileName . '.' . $fileExtension;
             $targetPath = $targetDir . $newFileName;
 
             // Mendapatkan ekstensi file
@@ -294,7 +294,7 @@ function ubah_galery($data)
             if (in_array($fileType, $allowedTypes)) {
                 // Pindahkan file ke direktori tujuan
                 if (move_uploaded_file($file['tmp_name'], $targetPath)) {
-                    return $db_connect->query("UPDATE galery SET nama = '$nama', deskripsi = '$deskripsi', jenis_produk = '$jenis_produk' WHERE id = '$id'");
+                    return $db_connect->query("UPDATE galery SET nama = '$nama', deskripsi = '$deskripsi', jenis_produk = '$jenis_produk', media = '$newFileName' WHERE id = '$id'");
                 } else {
                     echo 'Terjadi kesalahan saat mengunggah file.';
                 }

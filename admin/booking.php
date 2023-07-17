@@ -1,7 +1,13 @@
 <?php
 require_once '../functions/admin_service.php';
 
-$list_pesanan = $db_connect->query("SELECT penjualan.*, user.nama FROM penjualan JOIN user ON penjualan.id_user = user.id");
+if(isset($_GET['search'])){
+    $search = $_GET['search'];
+    $list_pesanan = $db_connect->query("SELECT penjualan.*, user.nama FROM penjualan JOIN user ON penjualan.id_user = user.id WHERE penjualan.nomor_invoice LIKE '%$search%'");
+}
+else{
+    $list_pesanan = $db_connect->query("SELECT penjualan.*, user.nama FROM penjualan JOIN user ON penjualan.id_user = user.id");
+}
 ?>
 <!DOCTYPE html>
 <!--
@@ -68,6 +74,11 @@ License: For each use you must have a valid license purchased only from above li
             }
             document.documentElement.setAttribute("data-bs-theme", themeMode);
         }
+
+        async function searchFn() {
+            let search = document.getElementById("search").value;
+            window.location.href = "booking?search=" + search;
+        }
     </script>
     <!--end::Theme mode setup on page load-->
     <!--begin::App-->
@@ -123,6 +134,10 @@ License: For each use you must have a valid license purchased only from above li
                             <!--begin::Content container-->
                             <div id="kt_app_content_container" class="app-container container-xxxl">
                                 <div class="card shadow-sm">
+                                    <div class="input-group mb-5 p-3">
+                                        <input type="text" id="search" class="form-control" placeholder="Search Invoice" aria-label="Search Invoice" aria-describedby="basic-addon2"/>
+                                        <button class="btn btn-secondary" onclick="searchFn()">Search</button>
+                                    </div>
                                     <div class="card-body pt-3">
                                         <!--begin::Table container-->
                                         <div class="table-responsive">
