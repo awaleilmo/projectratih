@@ -13,7 +13,15 @@
                 <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
                 <li><a class="nav-link scrollto" href="<?= isset($_SESSION['is_admin']) && $_SESSION['is_admin'] == true ? 'admin/' : (isset($_SESSION['is_admin']) && $_SESSION['is_admin'] == false ? 'member/' : 'login') ?>">
                         <?php
-                        echo isset($_SESSION['is_admin']) && $_SESSION['is_admin'] == true ? 'Admin' : (isset($_SESSION['is_admin']) && $_SESSION['is_admin'] == false ? 'Member Area' : 'Login');
+                        if(isset($_SESSION['is_admin']) && $_SESSION['is_admin'] == true && $_SESSION['role'] == 1){
+                            echo 'Admin';
+                        } else if(isset($_SESSION['is_admin']) && $_SESSION['is_admin'] == false){
+                            echo 'Member Area';
+                        } else if(isset($_SESSION['is_admin']) && $_SESSION['is_admin'] == true && $_SESSION['role'] == 2){
+                            echo 'Owner';
+                        } else {
+                            echo 'Login';
+                        }
                         ?>
                     </a></li>
             </ul>

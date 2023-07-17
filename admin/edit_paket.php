@@ -118,7 +118,7 @@ License: For each use you must have a valid license purchased only from above li
                                 <!--begin::Page title-->
                                 <div class="page-title d-flex flex-column justify-content-center flex-wrap me-3">
                                     <!--begin::Title-->
-                                    <h1 class="page-heading d-flex text-dark fw-bold fs-3 flex-column justify-content-center my-0">Kategori Paket</h1>
+                                    <h1 class="page-heading d-flex text-dark fw-bold fs-3 flex-column justify-content-center my-0">Edit Paket</h1>
                                     <!--end::Title-->
                                     <!--begin::Breadcrumb-->
                                     <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
@@ -210,7 +210,7 @@ License: For each use you must have a valid license purchased only from above li
                                             <div class="row g-9 mb-8">
                                                 <!--begin::Col-->
                                                 <div class="col-md-12 fv-row">
-                                                    <label class="required fs-6 fw-semibold mb-2">Jenis Produk</label>
+                                                    <label class="required fs-6 fw-semibold mb-2">Kategori Paket</label>
                                                     <select class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Jenis Produk" name="jenis_produk" required>
                                                         <option value="">pilih.</option>
                                                         <?php foreach ($daftar_jenis_produk as $jenis_produk) : ?>

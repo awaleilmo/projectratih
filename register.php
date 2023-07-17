@@ -59,18 +59,25 @@ if (isset($_POST['register'])) {
                                         if ($repeat_password != $password) {
                                             echo "<script>alert('password tidak sama');history.back();</script>";
                                         } else {
-                                            $id = $db_connect->query("SELECT AUTO_INCREMENT FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'project_ratih' AND TABLE_NAME = 'user'")->fetch_assoc()['AUTO_INCREMENT'];
+                                            $check = $db_connect->query("SELECT count(*) as count FROM user where username = '" . $username . "'")->fetch_assoc();
+                                            if($check['count'] > 0){
+                                                echo "<script>alert('username sudah terdaftar');history.back();</script>";
+                                            } else {
 
 
-                                            $sql = $db_connect->query("INSERT INTO user VALUES ('$id','$nama','$username','$password', '$email', '$alamat', '$jenis_kelamin', '$tgl_lahir','$no_telpon','default.jpg','0','0')");
+                                                $id = $db_connect->query("SELECT AUTO_INCREMENT FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'project_ratih' AND TABLE_NAME = 'user'")->fetch_assoc()['AUTO_INCREMENT'];
 
-                                            if ($sql) {
 
-                                                $_SESSION['id_user'] = $id;
-                                                $_SESSION['url_photo'] = 'default.jpg';
-                                                $_SESSION['is_admin'] = '0';
+                                                $sql = $db_connect->query("INSERT INTO user VALUES ('$id','$nama','$username','$password', '$email', '$alamat', '$jenis_kelamin', '$tgl_lahir','$no_telpon','default.jpg','0','0')");
 
-                                                echo "<script>alert('Berhasil daftar');location.href='member/'</script>";
+                                                if ($sql) {
+
+                                                    $_SESSION['id_user'] = $id;
+                                                    $_SESSION['url_photo'] = 'default.jpg';
+                                                    $_SESSION['is_admin'] = '0';
+
+                                                    echo "<script>alert('Berhasil daftar');location.href='member/'</script>";
+                                                }
                                             }
                                         }
 }

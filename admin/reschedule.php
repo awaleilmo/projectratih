@@ -163,8 +163,10 @@ License: For each use you must have a valid license purchased only from above li
                                                             <td><?= $data['keterangan'] ?></td>
                                                             <td class="text-capitalize"><?= $data['status'] ?></td>
                                                             <td class="<?= ($data['status'] != 'pending') ? 'd-none' : ''; ?>">
+                                                                <?php if($_SESSION['role'] == 1){ ?>
                                                                 <a href="reschedule?setuju=<?= $data['id_detail_penjualan'] ?>" class="btn btn-primary btn-sm">Setuju</a>
                                                                 <a href="reschedule?tolak=<?= $data['id_detail_penjualan'] ?>" class="btn btn-danger btn-sm">Tolak</a>
+                                                                <?php } ?>
                                                             </td>
                                                         </tr>
                                                     <?php endforeach; ?>

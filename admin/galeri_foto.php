@@ -226,11 +226,9 @@ License: For each use you must have a valid license purchased only from above li
                             <!--begin::Heading-->
                             <div class="mb-13 text-center">
                                 <!--begin::Title-->
-                                <h1 class="mb-3">Formulir Tambah Paket</h1>
+                                <h1 class="mb-3">Tambah Foto</h1>
                                 <!--end::Title-->
                                 <!--begin::Description-->
-                                <div class="text-muted fw-semibold fs-5">Isi formulir dengan benar
-                                </div>
                                 <!--end::Description-->
                             </div>
                             <!--end::Heading-->
@@ -272,8 +270,8 @@ License: For each use you must have a valid license purchased only from above li
                             <div class="row g-9 mb-8">
                                 <!--begin::Col-->
                                 <div class="col-md-12 fv-row">
-                                    <label class="required fs-6 fw-semibold mb-2">Jenis Produk</label>
-                                    <select class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Jenis Produk" name="jenis_produk" required>
+                                    <label class="required fs-6 fw-semibold mb-2">Kategori Paket</label>
+                                    <select class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Kategori Paket" name="jenis_produk" required>
                                         <option value="">pilih.</option>
                                         <?php foreach ($produk as $data) : ?>
                                             <option value="<?= $data['id'] ?>"><?= $data['jenis_produk'] ?></option>
