@@ -185,9 +185,9 @@ License: For each use you must have a valid license purchased only from above li
                                                 <input type="text" name="created_at" class="form-control form-control-solid" placeholder="Created at" value="<?= $list_komplain['created_at'] ?>" readonly />
                                             </div>
                                             <div class="text-end">
-                                                <a href="edit_komplain?id=<?= $_GET['komplain'] ?>&edit=media" class="btn btn-info <?= $list_komplain['status']  != 'pending' ? 'd-none' : '' ?>">Ubah Media</a>
-                                                <a href="edit_komplain?id=<?= $_GET['komplain'] ?>&edit=keterangan" class="btn btn-primary <?= $list_komplain['status']  != 'pending' ? 'd-none' : '' ?>">Ubah Keterangan</a>
-                                                <a href="detail_komplain?komplain=<?= $_GET['komplain'] ?>&delete=true" class="btn btn-danger" onclick="return confirm('hapus komplain ini ?')">Hapus Komplain</a>
+<!--                                                <a href="edit_komplain?id=--><?php //= $_GET['komplain'] ?><!--&edit=media" class="btn btn-info --><?php //= $list_komplain['status']  != 'pending' ? 'd-none' : '' ?><!--">Ubah Media</a>-->
+<!--                                                <a href="edit_komplain?id=--><?php //= $_GET['komplain'] ?><!--&edit=keterangan" class="btn btn-primary --><?php //= $list_komplain['status']  != 'pending' ? 'd-none' : '' ?><!--">Ubah Keterangan</a>-->
+<!--                                                <a href="detail_komplain?komplain=--><?php //= $_GET['komplain'] ?><!--&delete=true" class="btn btn-danger" onclick="return confirm('hapus komplain ini ?')">Hapus Komplain</a>-->
                                                 <!-- <a href="detail_komplain?komplain=<?= $_GET['komplain'] ?>&finish=true" class="btn btn-success" onclick="return confirm('Yakin untuk menyelesaikan komplainan ini ?')">Selesai</a> -->
                                             </div>
                                         </div>

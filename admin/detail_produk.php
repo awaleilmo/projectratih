@@ -171,7 +171,7 @@ License: For each use you must have a valid license purchased only from above li
                                             <div class="card-footer">
                                                 <h3>Deskripsi Produk</h3>
                                                 <hr>
-                                                <p class="text-justify">
+                                                <p class="text-justify" style="white-space: pre-line">
                                                     <?= $produk['deskripsi'] ?>
                                                 </p>
                                             </div>

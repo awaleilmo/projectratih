@@ -147,7 +147,11 @@ License: For each use you must have a valid license purchased only from above li
                             <div id="kt_app_content_container" class="app-container container-fluid">
                                 <!--begin::Content-->
                                 <?php if($_SESSION['role'] == 1){ ?>
-                                <a href="#" class="btn btn-sm fw-bold btn-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_new_target"><i class="ki-duotone ki-plus fs-2"></i>Tambah video Baru</a>
+                                    <div class="d-flex justify-content-end">
+                                        <a href="#" class="btn float-end btn-sm fw-bold btn-primary" data-bs-toggle="modal"
+                                           data-bs-target="#kt_modal_new_target"><i class="ki-duotone ki-plus fs-2"></i>Tambah
+                                            Video Baru</a>
+                                    </div>
                                 <?php } ?>
                                 <div class="row">
                                     <?php foreach ($list_video as $video) : ?>
