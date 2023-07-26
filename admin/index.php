@@ -6,6 +6,11 @@ $jumlah_reschedule_pending = $db_connect->query("SELECT * FROM `reschedule` WHER
 $jumlah_acara_bulan_ini = $db_connect->query("SELECT * FROM detail_penjualan WHERE MONTH(tgl_acara) = MONTH(CURRENT_DATE()) AND YEAR(tgl_acara) = YEAR(CURRENT_DATE())");
 $jumlah_pendapatan_bulanan = $db_connect->query("SELECT SUM(pembayaran) AS total_pembayaran FROM payment_penjualan WHERE MONTH(created_at) = MONTH(CURRENT_DATE()) AND YEAR(created_at) = YEAR(CURRENT_DATE()) AND status = 'diterima'")->fetch_assoc();
 $tanggal_disable = [];
+$rating1 = $db_connect->query("select count(*) as rating from rating where rating = '1'")->fetch_assoc();
+$rating2 = $db_connect->query("select count(*) as rating from rating where rating = '2'")->fetch_assoc();
+$rating3 = $db_connect->query("select count(*) as rating from rating where rating = '3'")->fetch_assoc();
+$rating4 = $db_connect->query("select count(*) as rating from rating where rating = '4'")->fetch_assoc();
+$rating5 = $db_connect->query("select count(*) as rating from rating where rating = '5'")->fetch_assoc();
 $list_acara = $db_connect->query("SELECT * FROM detail_penjualan");
 
 foreach ($list_acara as $acara) {
@@ -54,6 +59,11 @@ License: For each use you must have a valid license purchased only from above li
     <link href="../theme/Metronic/assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
     <!--end::Global Stylesheets Bundle-->
     <script src="../theme/Metronic/assets/plugins/custom/fullcalendar/fullcalendar.bundle.js"></script>
+
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/modules/export-data.js"></script>
+    <script src="https://code.highcharts.com/modules/accessibility.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             var calendarEl = document.getElementById('kt_calendar_app');
@@ -84,6 +94,55 @@ License: For each use you must have a valid license purchased only from above li
 
     <!-- jQuery UI -->
     <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
+    <style>
+        .highcharts-figure,
+        .highcharts-data-table table {
+            min-width: 310px;
+            max-width: 800px;
+            margin: 1em auto;
+        }
+
+        #container {
+            height: 400px;
+        }
+
+        .highcharts-data-table table {
+            font-family: Verdana, sans-serif;
+            border-collapse: collapse;
+            border: 1px solid #ebebeb;
+            margin: 10px auto;
+            text-align: center;
+            width: 100%;
+            max-width: 500px;
+        }
+
+        .highcharts-data-table caption {
+            padding: 1em 0;
+            font-size: 1.2em;
+            color: #555;
+        }
+
+        .highcharts-data-table th {
+            font-weight: 600;
+            padding: 0.5em;
+        }
+
+        .highcharts-data-table td,
+        .highcharts-data-table th,
+        .highcharts-data-table caption {
+            padding: 0.5em;
+        }
+
+        .highcharts-data-table thead tr,
+        .highcharts-data-table tr:nth-child(even) {
+            background: #f8f8f8;
+        }
+
+        .highcharts-data-table tr:hover {
+            background: #f1f7ff;
+        }
+
+    </style>
 </head>
 <!--end::Head-->
 <!--begin::Body-->
@@ -188,7 +247,7 @@ License: For each use you must have a valid license purchased only from above li
                                             <div class="card-body">
                                                 <div class="row no-gutters align-items-center">
                                                     <div class="col mr-2">
-                                                        <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Reschedule Requests</div>
+                                                        <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Reschedule Requests </div>
                                                         <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $jumlah_reschedule_pending->num_rows > 0 ? $jumlah_reschedule_pending->num_rows . ' Reschedule request approval' : 'Nothing' ?></div>
                                                     </div>
                                                     <div class="col-auto">
@@ -233,7 +292,7 @@ License: For each use you must have a valid license purchased only from above li
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row">
+                                <div class="row mb-5">
                                     <div class="card shadow-lg py-2">
                                         <!--begin::Card header-->
                                         <div class="card-header">
@@ -249,6 +308,86 @@ License: For each use you must have a valid license purchased only from above li
                                             <!--end::Calendar-->
                                         </div>
                                         <!--end::Card body-->
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xl-6">
+                                        <!--begin::Charts Widget 1-->
+                                        <div class="card card-xl-stretch mb-xl-8">
+                                            <!--begin::Body-->
+                                            <div class="card-body">
+                                                <!--begin::Chart-->
+                                                <div id="grafik_batang" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+                                                <!-- Script untuk membuat grafik batang -->
+                                                <script type="text/javascript">
+
+                                                    Highcharts.chart('grafik_batang', {
+                                                        chart: {
+                                                            type: 'column'
+                                                        },
+                                                        title: {
+                                                            text: 'Grafik Statistik Rating'
+                                                        },
+                                                        subtitle: {
+                                                            text: '3 Tahun Terakhir'
+                                                        },
+                                                        xAxis: {
+                                                            categories: [
+                                                                'Rating'
+                                                            ],
+                                                            crosshair: true
+                                                        },
+                                                        yAxis: {
+                                                            min: 0,
+                                                            title: {
+                                                                text: 'Jumlah'
+                                                            }
+                                                        },
+                                                        tooltip: {
+                                                            headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                                                            pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td><td style="padding:0"><b> {point.y:1f}</tr>',
+                                                            footerFormat: '</table>',
+                                                            shared: true,
+                                                            useHTML: true
+                                                        },
+                                                        plotOptions: {
+                                                            column: {
+                                                                pointPadding: 0.2,
+                                                                borderWidth: 0
+                                                            }
+                                                        },
+                                                        series: [{
+                                                            name: 'Rating 1',
+                                                            data: [<?php echo $rating1['rating'] ?>]
+
+                                                        }, {
+                                                            name: 'Rating 2',
+                                                            data: [<?php echo $rating2['rating'] ?>]
+
+                                                        }, {
+                                                            name: 'Rating 3',
+                                                            data: [<?php  echo $rating3['rating'] ?>]
+
+                                                        }, {
+                                                            name: 'Rating 4',
+                                                            data: [<?php echo $rating4['rating'] ?>]
+
+                                                        },  {
+                                                            name: 'Rating 5',
+                                                            data: [<?php echo $rating5['rating'] ?>]
+
+                                                        }]
+                                                    });
+                                                </script>
+                                                <!--end::Chart-->
+                                            </div>
+                                            <!--end::Body-->
+                                        </div>
+                                        <!--end::Charts Widget 1-->
+                                    </div>
+                                    <div class="col-xl-6">
+                                        <!--begin::Charts Widget 2-->
+                                        <!--end::Charts Widget 2-->
                                     </div>
                                 </div>
                             </div>
