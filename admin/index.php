@@ -11,6 +11,8 @@ $rating2 = $db_connect->query("select count(*) as rating from rating where ratin
 $rating3 = $db_connect->query("select count(*) as rating from rating where rating = '3'")->fetch_assoc();
 $rating4 = $db_connect->query("select count(*) as rating from rating where rating = '4'")->fetch_assoc();
 $rating5 = $db_connect->query("select count(*) as rating from rating where rating = '5'")->fetch_assoc();
+$stsPending = $db_connect->query("SELECT count(*) as pending FROM komplain WHERE status = 'pending'")->fetch_assoc();
+$stsProses = $db_connect->query("SELECT count(*) as proses FROM komplain WHERE status = 'dalam proses'")->fetch_assoc();
 $list_acara = $db_connect->query("SELECT * FROM detail_penjualan");
 
 foreach ($list_acara as $acara) {
@@ -387,6 +389,61 @@ License: For each use you must have a valid license purchased only from above li
                                     </div>
                                     <div class="col-xl-6">
                                         <!--begin::Charts Widget 2-->
+                                        <div class="card card-xl-stretch mb-xl-8">
+                                            <!--begin::Body-->
+                                            <div class="card-body">
+                                                <!--begin::Chart-->
+                                                <div id="grafik_batang2" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+                                                <!-- Script untuk membuat grafik batang -->
+                                                <script type="text/javascript">
+
+                                                    Highcharts.chart('grafik_batang2', {
+                                                        chart: {
+                                                            type: 'column'
+                                                        },
+                                                        title: {
+                                                            text: 'Grafik Statistik Rating'
+                                                        },
+                                                        xAxis: {
+                                                            categories: [
+                                                                'Komplain'
+                                                            ],
+                                                            crosshair: true
+                                                        },
+                                                        yAxis: {
+                                                            min: 0,
+                                                            title: {
+                                                                text: 'Jumlah'
+                                                            }
+                                                        },
+                                                        tooltip: {
+                                                            headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                                                            pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td><td style="padding:0"><b> {point.y:1f}</tr>',
+                                                            footerFormat: '</table>',
+                                                            shared: true,
+                                                            useHTML: true
+                                                        },
+                                                        plotOptions: {
+                                                            column: {
+                                                                pointPadding: 0.2,
+                                                                borderWidth: 0
+                                                            }
+                                                        },
+                                                        series: [{
+                                                            name: 'Rating 1',
+                                                            data: [<?php echo $stsPending['pending'] ?>]
+
+                                                        }, {
+                                                            name: 'Rating 2',
+                                                            data: [<?php echo $stsProses['proses'] ?>]
+
+                                                        }]
+                                                    });
+                                                </script>
+                                                <!--end::Chart-->
+                                            </div>
+                                            <!--end::Body-->
+                                        </div>
                                         <!--end::Charts Widget 2-->
                                     </div>
                                 </div>
