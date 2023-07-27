@@ -330,9 +330,6 @@ License: For each use you must have a valid license purchased only from above li
                                                         title: {
                                                             text: 'Grafik Statistik Rating'
                                                         },
-                                                        subtitle: {
-                                                            text: '3 Tahun Terakhir'
-                                                        },
                                                         xAxis: {
                                                             categories: [
                                                                 'Rating'
@@ -402,7 +399,7 @@ License: For each use you must have a valid license purchased only from above li
                                                             type: 'column'
                                                         },
                                                         title: {
-                                                            text: 'Grafik Statistik Rating'
+                                                            text: 'Grafik Statistik Komplain'
                                                         },
                                                         xAxis: {
                                                             categories: [
@@ -430,11 +427,11 @@ License: For each use you must have a valid license purchased only from above li
                                                             }
                                                         },
                                                         series: [{
-                                                            name: 'Rating 1',
+                                                            name: 'Pending',
                                                             data: [<?php echo $stsPending['pending'] ?>]
 
                                                         }, {
-                                                            name: 'Rating 2',
+                                                            name: 'Proses',
                                                             data: [<?php echo $stsProses['proses'] ?>]
 
                                                         }]

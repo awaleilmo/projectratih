@@ -157,6 +157,7 @@ License: For each use you must have a valid license purchased only from above li
                                                         <div class="mb-5">
                                                             <label class="required form-label">Media</label>
                                                             <input type="file" accept=".jpg, .jpeg, .png, .mp4, .pdf" name="media" class="form-control form-control-solid" placeholder="Media" required />
+                                                            <span class="form-text text-muted">*tipe file hanya <strong>JPG, JPEG, PNG, MP4, PDF</strong></span>
                                                         </div>
                                                     </div>
                                                     <div class="card-footer">

@@ -306,7 +306,8 @@ License: For each use you must have a valid license purchased only from above li
                                                         </div>
                                                         <div class="mb-5">
                                                             <label class="required form-label">Bukti Transfer</label>
-                                                            <input type="file" accept="image/jpg, image/jpeg, image/png" name="bukti_transfer" class="form-control form-control-solid" placeholder="Bukti Transfer" required />
+                                                            <input type="file" accept=".jpg, .jpeg, .png" name="bukti_transfer" class="form-control form-control-solid" placeholder="Bukti Transfer" required />
+                                                            <span class="form-text text-muted">*tipe file hanya <strong>JPG, JPEG, PNG</strong></span>
                                                         </div>
                                                         <div class="mb-5">
                                                             <label class="required form-label">Alamat</label>
