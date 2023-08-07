@@ -71,7 +71,7 @@ $list_galery = $db_connect->query("SELECT * FROM galery WHERE jenis_produk = '$i
     <section id="hero" class="d-flex align-items-center">
         <div class="container" data-aos="zoom-out" data-aos-delay="100">
             <h1><span><?= $kategori['jenis_produk'] ?></span></h1>
-            <h2>From Inspiration to Celebration: Our Expertise, Your Perfect Day</h2>
+            <h2>From Inspiration to Celebration</h2>
             <!-- <div class="d-flex">
                 <a href="#about" class="btn-get-started scrollto">Get Started</a>
                 <a href="https://www.youtube.com/watch?v=jDDaplaOz7Q" class="glightbox btn-watch-video"><i class="bi bi-play-circle"></i><span>Watch Video</span></a>
