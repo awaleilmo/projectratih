@@ -6,10 +6,9 @@ if (!isset($_GET['id'])) {
 }
 
 if (isset($_POST['simpan'])) {
-    // var_dump($_POST);
     if (ubah_galery($_POST)) {
         $id = $_POST['id'];
-        echo "<script>alert('berhasil di rubah');location.href='galeri_foto'</script>";
+        echo "<script>window.location.href='galeri_foto'; window.alert('berhasil di rubah');</script>";
     }
 }
 

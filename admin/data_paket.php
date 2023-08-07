@@ -20,7 +20,7 @@ if (isset($_POST['buat_paket'])) {
     }
 }
 
-$daftar_produk = $db_connect->query("SELECT * FROM produk");
+$daftar_produk = $db_connect->query("SELECT * FROM produk ORDER BY id DESC");
 $daftar_jenis_produk = $db_connect->query("SELECT * FROM jenis_produk");
 
 ?>
@@ -358,7 +358,7 @@ License: For each use you must have a valid license purchased only from above li
                             <div class="d-flex flex-column mb-8 fv-row">
                                 <!--begin::Label-->
                                 <label class="d-flex align-items-center fs-6 fw-semibold mb-2">
-                                    <span class="required">Video</span>
+                                    <span >Video</span>
                                     <span class="ms-1" data-bs-toggle="tooltip" title="Masukan Video">
                                         <i class="ki-duotone ki-information-5 text-gray-500 fs-6">
                                             <span class="path1"></span>
@@ -368,7 +368,7 @@ License: For each use you must have a valid license purchased only from above li
                                     </span>
                                 </label>
                                 <!--end::Label-->
-                                <input type="file" accept="video/mp4" class="form-control form-control-solid" placeholder="Harga" name="video" value="" required />
+                                <input type="file" accept="video/mp4" class="form-control form-control-solid" placeholder="Harga" name="video" value="" />
                             </div>
                             <!--end::Input group-->
                             <!--begin::Actions-->

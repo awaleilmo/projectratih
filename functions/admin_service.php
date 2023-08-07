@@ -271,10 +271,12 @@ function ubah_galery($data)
     $jenis_produk = $data['jenis_produk'];
     $deskripsi = $data['deskripsi'];
     $jenis_media = $data['jenis_media'];
+    $edit_photo = isset($data['editPhoto']) ? $data['editPhoto'] : 0;
+    $edit_video = isset($data['editVideo']) ? $data['editVideo'] : 0;
 
 
     if ($jenis_media == 'photo') {
-        if ($data['editPhoto']) {
+        if ($edit_photo == 1) {
             $file = $_FILES['media'];
             // Menentukan direktori tujuan penyimpanan file
             $targetDir = '../image/galery/';
@@ -305,7 +307,7 @@ function ubah_galery($data)
             return $db_connect->query("UPDATE galery SET nama = '$nama', deskripsi = '$deskripsi', jenis_produk = '$jenis_produk' WHERE id = '$id'");
         }
     } else {
-        if ($data['editVideo']) {
+        if ($edit_video == 1) {
             $file = $_FILES['media'];
             // Menentukan direktori tujuan penyimpanan file
             $targetDir = '../videos/';

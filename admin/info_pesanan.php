@@ -180,8 +180,6 @@ License: For each use you must have a valid license purchased only from above li
                                                 <!--begin::Message-->
                                                 <div class="fw-bold fs-2">Pesanan #<?= $data_pesanan['nomor_invoice'] ?>
                                                     <a href="#" id="btnPrint" class="btn float-end btn-sm fw-bold btn-primary" onclick="printFunction()"><i class="ki-duotone ki-print fs-2"></i>Print</a>
-                                                    <br>
-                                                    <span class="text-muted fs-5">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi, vitae.</span>
                                                 </div>
                                                 <!--begin::Message-->
                                                 <!--begin::Separator-->

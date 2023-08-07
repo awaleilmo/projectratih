@@ -3,7 +3,7 @@ require_once '../functions/member_service.php';
 require_once '../functions/general_service.php';
 
 if (isset($_POST['simpan'])) {
-    if (update_profile($_POST, $_FILES)) {
+    if (update_password($_POST, $_FILES)) {
         echo "<script>alert('berhasil');location.href='user'</script>";
     }
 }
