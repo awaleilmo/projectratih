@@ -271,8 +271,8 @@ function ubah_galery($data)
     $jenis_produk = $data['jenis_produk'];
     $deskripsi = $data['deskripsi'];
     $jenis_media = $data['jenis_media'];
-    $edit_photo = isset($data['editPhoto']) ? $data['editPhoto'] : 0;
-    $edit_video = isset($data['editVideo']) ? $data['editVideo'] : 0;
+    $edit_photo = isset($data['editPhoto']) ? 1 : 0;
+    $edit_video = isset($data['editVideo']) ? 1 : 0;
 
 
     if ($jenis_media == 'photo') {
