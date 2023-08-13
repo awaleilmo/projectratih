@@ -28,6 +28,12 @@ if (isset($_POST['register'])) {
     $jenis_kelamin = mysqli_real_escape_string($db_connect, $_POST['jenis_kelamin']);
     $tgl_lahir = mysqli_real_escape_string($db_connect, $_POST['tgl_lahir']);
     $no_telpon = mysqli_real_escape_string($db_connect, $_POST['no_telpon']);
+    $today = new DateTime();
+    try {
+        $tglLhr = new DateTime($_POST['tgl_lahir']);
+    } catch (Exception $e) {
+        $tglLhr = $today;
+    }
 
     if ($nama === '') {
         echo "<script>alert('nama tidak boleh kosong');history.back();</script>";
@@ -58,6 +64,8 @@ if (isset($_POST['register'])) {
                                     } else
                                         if ($repeat_password != $password) {
                                             echo "<script>alert('password tidak sama');history.back();</script>";
+                                        }else if($tglLhr > $today){
+                                            echo "<script>alert('Tanggal lahir tidak benar');history.back();</script>";
                                         } else {
                                             $check = $db_connect->query("SELECT count(*) as count FROM user where username = '" . $username . "'")->fetch_assoc();
                                             if($check['count'] > 0){

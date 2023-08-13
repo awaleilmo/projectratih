@@ -72,24 +72,31 @@ License: For each use you must have a valid license purchased only from above li
     <script src="https://code.highcharts.com/modules/export-data.js"></script>
     <script src="https://code.highcharts.com/modules/accessibility.js"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            var calendarEl = document.getElementById('kt_calendar_app');
+        const compareDate = (value) =>{
+            let today = new Date();
+            let dateComp = new Date(value);
 
-            var calendar = new FullCalendar.Calendar(calendarEl, {
+            return today > dateComp;
+        }
+        document.addEventListener('DOMContentLoaded', function () {
+            let calendarEl = document.getElementById('kt_calendar_app');
+            let calendar = new FullCalendar.Calendar(calendarEl, {
                 initialView: 'dayGridMonth',
                 height: 650,
                 events: [
-                    <?php foreach ($list_acara as $acara) : ?> {
+                    <?php foreach ($list_acara as $acara) : ?>
+                    {
                         id: '<?= $acara['id']; ?>',
                         start: '<?= $acara['tgl_acara']; ?>',
                         end: '<?= $acara['tgl_acara']; ?>',
-                        title: '<?= 'sudah dibooking' ?>'
+                        title: !compareDate('<?= $acara['tgl_acara']; ?>') ? 'Sudah dibooking' : 'Selesai',
+                        color: !compareDate('<?= $acara['tgl_acara']; ?>') ? '#3788d8':'limegreen'
                     },
                     <?php endforeach; ?>
                 ]
             });
 
-            console.log(calendar);
+            console.log(compareDate('<?= $acara['tgl_acara']; ?>'), 'today');
 
             calendar.render();
         });
@@ -160,8 +167,8 @@ License: For each use you must have a valid license purchased only from above li
       data-kt-app-sidebar-push-footer="true" data-kt-app-toolbar-enabled="true" class="app-default">
 <!--begin::Theme mode setup on page load-->
 <script>
-    var defaultThemeMode = "light";
-    var themeMode;
+    let defaultThemeMode = "light";
+    let themeMode;
     if (document.documentElement) {
         if (document.documentElement.hasAttribute("data-bs-theme-mode")) {
             themeMode = document.documentElement.getAttribute("data-bs-theme-mode");
@@ -522,7 +529,7 @@ License: For each use you must have a valid license purchased only from above li
         <!--end::App-->
         <!--begin::Javascript-->
         <script>
-            var hostUrl = "../theme/Metronic/assets/";
+            let hostUrl = "../theme/Metronic/assets/";
         </script>
         <!--begin::Global Javascript Bundle(mandatory for all pages)-->
         <script src="../theme/Metronic/assets/plugins/global/plugins.bundle.js"></script>

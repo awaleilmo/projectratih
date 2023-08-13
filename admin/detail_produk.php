@@ -59,6 +59,7 @@ License: For each use you must have a valid license purchased only from above li
     <link href="../theme/Metronic/assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
     <!--end::Global Stylesheets Bundle-->
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.0/themes/smoothness/jquery-ui.css">
+
 </head>
 <!--end::Head-->
 <!--begin::Body-->
@@ -85,6 +86,9 @@ License: For each use you must have a valid license purchased only from above li
         }
     </script>
     <!--end::Theme mode setup on page load-->
+
+
+
     <!--begin::App-->
     <div class="d-flex flex-column flex-root app-root" id="kt_app_root">
         <!--begin::Page-->
@@ -141,12 +145,12 @@ License: For each use you must have a valid license purchased only from above li
                             <!--end::Toolbar container-->
                         </div>
                         <!--end::Toolbar-->
-                        <!--begin::Content-->
-                        <div id="kt_app_content" class="app-content flex-column-fluid">
+
                             <!--begin::Content container-->
                             <div id="kt_app_content_container" class="app-container container-xxl">
                                 <div class="row">
                                     <div class="col-8">
+
                                         <div class="card shadow-sm mt-5">
                                             <div class="card-body">
                                                 <h1><?= $produk['nama'] ?></h1>
@@ -232,7 +236,7 @@ License: For each use you must have a valid license purchased only from above li
     <!--end::App-->
     <!--begin::Javascript-->
     <script>
-        var hostUrl = "../theme/Metronic/assets/";
+        var hostUrl = "../theme/Metronic/assets";
     </script>
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -243,6 +247,7 @@ License: For each use you must have a valid license purchased only from above li
     <script src="../theme/Metronic/assets/js/scripts.bundle.js"></script>
     <!--end::Global Javascript Bundle-->
     <!--begin::Vendors Javascript(used for this page only)-->
+    <script src="../theme/Metronic/assets/js/custom/toasts.js"></script>
     <script src="../theme/Metronic/assets/plugins/custom/fullcalendar/fullcalendar.bundle.js"></script>
     <!-- <script src="https://cdn.amcharts.com/lib/5/index.js"></script>
         <script src="https://cdn.amcharts.com/lib/5/xy.js"></script>

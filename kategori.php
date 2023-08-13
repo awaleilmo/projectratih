@@ -144,7 +144,7 @@ $list_galery = $db_connect->query("SELECT * FROM galery WHERE jenis_produk = '$i
                                 <h3><?= $produk['nama'] ?></h3>
                                 <h4></h4>
                                 <ul>
-                                    <li><?= $produk['deskripsi'] ?></li>
+                                    <li class="text-center" style="white-space: pre-line"><?= $produk['deskripsi'] ?></li>
                                     <li>
                                         <h5>Rp <?= formatHarga($produk['harga']); ?></h5>
                                     </li>

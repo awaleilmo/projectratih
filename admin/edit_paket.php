@@ -11,18 +11,23 @@ $data = $db_connect->query("SELECT * FROM produk WHERE id = '" . $_GET['paket'] 
 $daftar_jenis_produk = $db_connect->query("SELECT * FROM jenis_produk");
 
 if (isset($_POST['save'])) {
+    $editPhoto = isset($_POST['editPhoto']);
+    $editVideo = isset($_POST['editVideo']);
     $id = mysqli_real_escape_string($db_connect, $_POST['id_paket']);
     $paket = mysqli_real_escape_string($db_connect, $_POST['paket']);
     $deskripsi = mysqli_real_escape_string($db_connect, $_POST['deskripsi']);
     $jenis_paket = mysqli_real_escape_string($db_connect, $_POST['jenis_produk']);
     $harga = mysqli_real_escape_string($db_connect, $_POST['harga']);
-    $foto = $_POST['editPhoto'] ? $_FILES['foto'] : $data['photo'];
-    $video = $_POST['editVideo'] ? $_FILES['video'] : $data['video'];
-    $edit_photo = $_POST['editPhoto'] ? $_POST['editPhoto'] : false;
-    $edit_video = $_POST['editVideo'] ? $_POST['editVideo'] : false;
+    $foto = $editPhoto ? $_FILES['foto'] : $data['photo'];
+    $video = $editVideo ? $_FILES['video'] : $data['video'];
+    $edit_photo = $editPhoto ? $_POST['editPhoto'] : false;
+    $edit_video = $editVideo ? $_POST['editVideo'] : false;
 
     if (edit_produk($id, $paket, $deskripsi, $jenis_paket, $harga, $foto, $video, $edit_photo, $edit_video)) {
-        echo "<script>alert('berhasil diubah');location.href='detail_produk?produk=$id'</script>";
+        $_SESSION['action_ed'] = 1;
+        $_SESSION['edit_data'] = 1;
+        $_SESSION['message_data'] = "Data berhasil diubah";
+        echo "<script>location.href='detail_produk?produk=$id'</script>";
     }
 }
 
@@ -266,7 +271,7 @@ License: For each use you must have a valid license purchased only from above li
                                             <!--begin::Input group-->
                                             <div class="d-flex flex-column mb-8 fv-row">
                                                 <div class="form-check form-switch">
-                                                    <input class="form-check-input" type="checkbox" id="switchEditVideo" name="editVideo">
+                                                    <input class="form-check-input" type="checkbox" id="switchEditVideo" value="false" name="editVideo">
                                                     <label class="form-check-label" for="switchEditVideo">Edit Video</label>
                                                 </div>
                                             </div>
