@@ -54,7 +54,7 @@ if (isset($_POST['submit_pembayaran'])) {
 
         //pengirim
         $mail->setFrom('system@wldproject.com', 'WLD Project');
-        $mail->addAddress('admin@wldproject.com', 'Admin');      //Add a recipient
+//        $mail->addAddress('admin@wldproject.com', 'Admin');      //Add a recipient
         foreach ($emain as $email) {
             $mail->addAddress($email['email'], $email['nama']);
         }
