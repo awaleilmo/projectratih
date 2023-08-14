@@ -70,6 +70,18 @@ License: For each use you must have a valid license purchased only from above li
     <!--end::Global Stylesheets Bundle-->
     <script src="../theme/Metronic/assets/plugins/custom/fullcalendar/fullcalendar.bundle.js"></script>
     <script>
+        const compareDate = (value) => {
+            let today = new Date();
+            let dateComp = new Date(value);
+
+            return today > dateComp;
+        }
+        const mydate = (value1, value2) => {
+            let today = new Date(value1);
+            let dateComp = new Date(value2);
+            return today.getTime() === dateComp.getTime();
+        }
+
         document.addEventListener('DOMContentLoaded', function() {
             var calendarEl = document.getElementById('kt_calendar_app');
 
@@ -81,7 +93,8 @@ License: For each use you must have a valid license purchased only from above li
                             id: '<?= $acara['id']; ?>',
                             start: '<?= $acara['tgl_acara']; ?>',
                             end: '<?= $acara['tgl_acara']; ?>',
-                            title: '<?= $data_jadwal['tgl_acara'] == $acara['tgl_acara'] ? 'acara anda' : 'sudah dibooking' ?>'
+                            title: mydate( '<?= $data_jadwal['tgl_acara'] ?>', '<?= $acara['tgl_acara'] ?>') ? 'Acara Saya' : !compareDate('<?= $acara['tgl_acara']; ?>') ? 'Sudah dibooking' : 'Selesai',
+                            color: mydate( '<?= $data_jadwal['tgl_acara'] ?>', '<?= $acara['tgl_acara'] ?>') ? 'deeppink': !compareDate('<?= $acara['tgl_acara']; ?>') ? '#3788d8' : 'limegreen'
                         },
                     <?php endforeach; ?>
                 ]
@@ -325,8 +338,13 @@ License: For each use you must have a valid license purchased only from above li
                     var input = dateInputs[i];
                     var currentDate = new Date();
                     var minDate = currentDate.toISOString().split("T")[0];
-                    input.min = minDate;
-                    input.addEventListener("input", disableSpecificDates);
+                    let someDate = new Date('<?= $data_jadwal['tgl_acara'] ?>');
+                    let numberOfDaysToAdd = -6;
+                    let result = someDate.setDate(someDate.getDate() + numberOfDaysToAdd);
+                    let minDateF = new Date(result);
+                    input.min = minDateF.toISOString().split("T")[0];
+                    input.max = '<?= $data_jadwal['tgl_acara'] ?>';
+                    // input.addEventListener("input", disableSpecificDates);
                 }
             });
 

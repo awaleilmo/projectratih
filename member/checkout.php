@@ -17,6 +17,7 @@ require_once '../functions/email.php';
 
 $list_item = $db_connect->query("SELECT * FROM keranjang WHERE id_user = '" . $_SESSION['id_user'] . "'");
 $list_item_2 = $db_connect->query("SELECT * FROM keranjang WHERE id_user = '" . $_SESSION['id_user'] . "'");
+$emain = $db_connect->query('SELECT * FROM user WHERE is_admin = "1"');
 $grand_total = 0;
 $list_acara = $db_connect->query("SELECT * FROM detail_penjualan");
 $tanggal_disable = [];
@@ -54,7 +55,10 @@ if (isset($_POST['submit_pembayaran'])) {
         //pengirim
         $mail->setFrom('system@wldproject.com', 'WLD Project');
         $mail->addAddress('admin@wldproject.com', 'Admin');      //Add a recipient
-        $mail->addAddress('ratihbwln@gmail.com', 'Ratih');     //Add a recipient
+        foreach ($emain as $email) {
+            $mail->addAddress($email['email'], $email['nama']);
+        }
+//        $mail->addAddress('ratihbwln@gmail.com', 'Ratih');
 
         //Content
         $mail->AddCustomHeader('X-MSMail-Priority', 'High');
