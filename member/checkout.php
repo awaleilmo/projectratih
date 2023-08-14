@@ -341,7 +341,7 @@ License: For each use you must have a valid license purchased only from above li
                                                             <tr>
                                                                 <td colspan="2">
                                                                     <h3>Pembayaran dilakukan dengan transfer ke rekening
-                                                                        BCA : 882982310, atas nama : Ucup Marucup</h3>
+                                                                        BCA : 2453109674, atas nama : FAIZ</h3>
                                                                 </td>
                                                             </tr>
                                                         </tfooter>
