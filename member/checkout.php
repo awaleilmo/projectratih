@@ -54,7 +54,7 @@ if (isset($_POST['submit_pembayaran'])) {
         //pengirim
         $mail->setFrom('system@wldproject.com', 'WLD Project');
         $mail->addAddress('admin@wldproject.com', 'Admin');      //Add a recipient
-//        $mail->addAddress('ratihbwln@gmail.com', 'Ratih');     //Add a recipient
+        $mail->addAddress('ratihbwln@gmail.com', 'Ratih');     //Add a recipient
 
         //Content
         $mail->AddCustomHeader('X-MSMail-Priority', 'High');
