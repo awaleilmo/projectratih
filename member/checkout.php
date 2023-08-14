@@ -1,6 +1,18 @@
 <?php
+
+global $db_connect;
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
+
+require '../phpmailer/src/Exception.php';
+require '../phpmailer/src/PHPMailer.php';
+require '../phpmailer/src/SMTP.php';
+
 require_once '../functions/member_service.php';
 require_once '../functions/general_service.php';
+require_once '../functions/email.php';
 
 
 $list_item = $db_connect->query("SELECT * FROM keranjang WHERE id_user = '" . $_SESSION['id_user'] . "'");
@@ -8,6 +20,7 @@ $list_item_2 = $db_connect->query("SELECT * FROM keranjang WHERE id_user = '" . 
 $grand_total = 0;
 $list_acara = $db_connect->query("SELECT * FROM detail_penjualan");
 $tanggal_disable = [];
+
 
 foreach ($list_acara as $acara) {
     array_push($tanggal_disable, $acara['tgl_acara']);
@@ -26,25 +39,54 @@ if (isset($_POST['submit_pembayaran'])) {
     $targetPath = $targetDir . $newFileName;
     $status = 'pending';
 
+    $mail = new PHPMailer(true);
+    try {
+        //Server settings
+        $mail->SMTPDebug = false;;                      //Enable verbose debug output
+        $mail->isSMTP();                                            //Send using SMTP
+        $mail->Host = 'mail.wldproject.com';                     //Set the SMTP server to send through
+        $mail->SMTPAuth = true;                                   //Enable SMTP authentication
+        $mail->Username = 'system@wldproject.com';                     //SMTP username
+        $mail->Password = 'system1721';                               //SMTP password
+        $mail->SMTPSecure = 'ssl';            //Enable implicit TLS encryption
+        $mail->Port = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
 
-    // proses insert data penjualan 
-    $db_connect->query("INSERT INTO penjualan VALUES ('$nomor_invoice', '" . $_SESSION['id_user'] . "', '" . date('Y-m-d H:i:s') . "','null','0','" . $_POST['total_harga'] . "','" . $_POST['total_harga'] . "')");
+        //pengirim
+        $mail->setFrom('system@wldproject.com', 'WLD Project');
+        $mail->addAddress('admin@wldproject.com', 'Admin');      //Add a recipient
+//        $mail->addAddress('ratihbwln@gmail.com', 'Ratih');     //Add a recipient
 
-    // proses insert detail produk pernjualan beserta tanggal nya
-    for ($i = 0; $i < count($_POST['tgl_booking_product']); $i++) {
-        $db_connect->query("INSERT INTO detail_penjualan (`nomor_invoice`, `id_produk`, `tgl_acara`) VALUES ('$nomor_invoice', '" . $_POST['id_product'][$i] . "', '" . $_POST['tgl_booking_product'][$i] . "')");
+        //Content
+        $mail->AddCustomHeader('X-MSMail-Priority', 'High');
+        $mail->AddCustomHeader('Importance', 'High');
+        $mail->AddCustomHeader('X-MSMail-Priority', 'High');
+        $mail->isHTML(true);                                  //Set email format to HTML
+        $mail->Subject = 'Booking WLD Project #' . $nomor_invoice;
+        $mail->Body = sendEmailToAdmin();
+        $mail->AltBody = '';
+        //$mail->AddEmbeddedImage('gambar/logo.png', 'logo'); //abaikan jika tidak ada logo
+        //$mail->addAttachment('');
+
+        $mail->send();
+        $db_connect->query("DELETE FROM keranjang WHERE id_user = '" . $_SESSION['id_user'] . "'");
+
+        // proses insert data penjualan
+        $db_connect->query("INSERT INTO penjualan VALUES ('$nomor_invoice', '" . $_SESSION['id_user'] . "', '" . date('Y-m-d H:i:s') . "','null','0','" . $_POST['total_harga'] . "','" . $_POST['total_harga'] . "')");
+
+        // proses insert detail produk pernjualan beserta tanggal nya
+        for ($i = 0; $i < count($_POST['tgl_booking_product']); $i++) {
+            $db_connect->query("INSERT INTO detail_penjualan (`nomor_invoice`, `id_produk`, `tgl_acara`) VALUES ('$nomor_invoice', '" . $_POST['id_product'][$i] . "', '" . $_POST['tgl_booking_product'][$i] . "')");
+        }
+
+        // proses insert payment penjualan
+        $db_connect->query("INSERT INTO payment_penjualan VALUES ('','$nomor_invoice', '" . $_POST['nominal'] . "', '" . $_POST['bank'] . "', '$newFileName','" . $_POST['nama_pengirim'] . "','$status', '" . date('Y-m-d H:i:s') . "')");
+
+        move_uploaded_file($bukti_transfer['tmp_name'], $targetPath);
+        // return to pesanan page
+        echo "<script>alert('Pesanan berhasil dibuat');location.href='pesanan'</script>";
+    } catch (Exception $e) {
+        echo "<script>alert('Message could not be sent. Mailer Error: {$mail->ErrorInfo}');</script>";
     }
-
-    // proses insert payment penjualan 
-    $db_connect->query("INSERT INTO payment_penjualan VALUES ('','$nomor_invoice', '" . $_POST['nominal'] . "', '" . $_POST['bank'] . "', '$newFileName','" . $_POST['nama_pengirim'] . "','$status', '" . date('Y-m-d H:i:s') . "')");
-
-    move_uploaded_file($bukti_transfer['tmp_name'], $targetPath);
-
-    // proses flush keranjang
-    $db_connect->query("DELETE FROM keranjang WHERE id_user = '" . $_SESSION['id_user'] . "'");
-
-    // return to pesanan page
-    echo "<script>alert('Pesanan berhasil dibuat');location.href='pesanan'</script>";
 }
 
 ?>
@@ -96,11 +138,23 @@ License: For each use you must have a valid license purchased only from above li
     <!--end::Global Stylesheets Bundle-->
     <script src="../theme/Metronic/assets/plugins/custom/fullcalendar/fullcalendar.bundle.js"></script>
     <script>
-        const compareDate = (value) =>{
+        const gantidp = (value) => {
+            let slt = document.getElementById('changeDP')
+            let result = document.getElementById('nominal');
+            const total = value * slt.value / 100;
+            result.value = total
+        }
+
+        const compareDate = (value) => {
             let today = new Date();
             let dateComp = new Date(value);
 
             return today > dateComp;
+        }
+
+        const SaveFn = () => {
+            let result = document.getElementById('kt_modal_2')
+            result.classList.add('d-block')
         }
 
         document.addEventListener('DOMContentLoaded', function () {
@@ -296,42 +350,12 @@ License: For each use you must have a valid license purchased only from above li
                                         </div>
                                     </div>
                                     <div class="col-lg-6 mt-sm-5">
-                                        <form action="" method="POST" enctype="multipart/form-data">
+                                        <form action="" method="POST" enctype="multipart/form-data" onsubmit="SaveFn()">
                                             <div class="card shadow-sm">
                                                 <div class="card-header">
                                                     <h3 class="card-title">Pembayaran</h3>
                                                 </div>
-                                                <script>
-                                                    const checkDate = (value) => {
-                                                        let dtToday = new Date(value);
-                                                        let month = dtToday.getMonth() + 1;     // getMonth() is zero-based
-                                                        let day = dtToday.getDate();
-                                                        let year = dtToday.getFullYear();
-                                                        if(month < 10)
-                                                            month = '0' + month.toString();
-                                                        if(day < 10)
-                                                            day = '0' + day.toString();
-
-                                                        let maxDate = year + '-' + month + '-' + day;
-                                                        return maxDate;
-                                                        // $('#dateID').attr('min', maxDate);
-                                                    }
-                                                </script>
                                                 <div class="card-body">
-                                                    <script>
-                                                        let dtToday = new Date();
-                                                        let month = dtToday.getMonth() + 1;     // getMonth() is zero-based
-                                                        let day = dtToday.getDate();
-                                                        let year = dtToday.getFullYear();
-                                                        if(month < 10)
-                                                            month = '0' + month.toString();
-                                                        if(day < 10)
-                                                            day = '0' + day.toString();
-
-                                                        let maxDate = year + '-' + month + '-' + day;
-                                                        document.getElementById('dateID').attributes.min.value = maxDate;
-                                                        // $('#dateID').attr('min', maxDate);
-                                                    </script>
                                                     <?php foreach ($list_item_2 as $item) : ?>
                                                         <?php
                                                         $produk = $db_connect->query("SELECT * FROM produk WHERE id = '" . $item['id_produk'] . "'")->fetch_assoc();
@@ -352,6 +376,15 @@ License: For each use you must have a valid license purchased only from above li
                                                                    required/>
                                                         </div>
                                                     <?php endforeach; ?>
+                                                    <div class="mb-5">
+                                                        <label class="form-label">DP</label>
+                                                        <select id="changeDP" class="form-select" onchange="gantidp(<?= $grand_total ?>)" aria-label="Select example">
+                                                            <option value="0">0 %</option>
+                                                            <option value="50">50 %</option>
+                                                            <option value="70">70 %</option>
+                                                            <option value="100">100 %</option>
+                                                        </select>
+                                                    </div>
                                                     <div class="mb-5">
                                                         <label class="required form-label">Nominal Pembayaran</label>
                                                         <input type="number" id="nominal" name="nominal"
@@ -392,6 +425,19 @@ License: For each use you must have a valid license purchased only from above li
                                                 </div>
                                             </div>
                                         </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="modal bg-body" tabindex="-1" id="kt_modal_2">
+                            <div class="modal-dialog modal-fullscreen">
+                                <div class="modal-content shadow-none">
+
+                                    <div class="modal-body d-flex align-items-center justify-content-center">
+                                        <span class="spinner-border text-primary" role="status">
+                                            <span class="visually-hidden">Loading...</span>
+                                        </span>
                                     </div>
                                 </div>
                             </div>

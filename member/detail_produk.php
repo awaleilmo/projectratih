@@ -269,9 +269,7 @@ License: For each use you must have a valid license purchased only from above li
                                                                 <div class="h-8px mx-3 bg-gray-500 bg-opacity-50 rounded">
                                                                     <div class="bg-success rounded h-8px"
                                                                          role="progressbar"
-                                                                         style="<?php echo 'width : ' . ($rating5['total'] / $ratingtotal['total'] * 100) . '%;' ?>"
-                                                                         aria-valuenow="90" aria-valuemin="0"
-                                                                         aria-valuemax="<?= $ratingtotal['total'] ?>>"></div>
+                                                                         style="width: <?php echo $rating5['total'] != '0' ? ($rating5['total'] / $ratingtotal['total'] * 100) : '0' ?>%"></div>
                                                                 </div>
                                                             </td>
                                                             <td class="fw-normal text-gray-700">
@@ -289,9 +287,7 @@ License: For each use you must have a valid license purchased only from above li
                                                                 <div class="h-8px mx-3 bg-gray-500 bg-opacity-50 rounded">
                                                                     <div class="bg-success rounded h-8px"
                                                                          role="progressbar"
-                                                                         style="<?php echo 'width : ' . ($rating4['total'] / $ratingtotal['total'] * 100) . '%;' ?>"
-                                                                         aria-valuenow="50" aria-valuemin="0"
-                                                                         aria-valuemax="100"></div>
+                                                                         style="width: <?php echo $rating4['total'] != '0' ? ($rating4['total'] / $ratingtotal['total'] * 100) : '0' ?>%"></div>
                                                                 </div>
                                                             </td>
                                                             <td class="fw-normal text-gray-700">
@@ -309,9 +305,7 @@ License: For each use you must have a valid license purchased only from above li
                                                                 <div class="h-8px mx-3 bg-gray-500 bg-opacity-50 rounded">
                                                                     <div class="bg-success rounded h-8px"
                                                                          role="progressbar"
-                                                                         style="<?php echo 'width : ' . ($rating3['total'] / $ratingtotal['total'] * 100) . '%;' ?>"
-                                                                         aria-valuenow="50" aria-valuemin="0"
-                                                                         aria-valuemax="100"></div>
+                                                                         style="width: <?php echo $rating3['total'] != '0' ? ($rating3['total'] / $ratingtotal['total'] * 100) : '0' ?>%"></div>
                                                                 </div>
                                                             </td>
                                                             <td class="fw-normal text-gray-700">
@@ -329,9 +323,7 @@ License: For each use you must have a valid license purchased only from above li
                                                                 <div class="h-8px mx-3 bg-gray-500 bg-opacity-50 rounded">
                                                                     <div class="bg-success rounded h-8px"
                                                                          role="progressbar"
-                                                                         style="<?php echo 'width : ' . ($rating2['total'] / $ratingtotal['total'] * 100) . '%;' ?>"
-                                                                         aria-valuenow="50" aria-valuemin="0"
-                                                                         aria-valuemax="100"></div>
+                                                                         style="width: <?php echo $rating2['total'] != '0' ? ($rating2['total'] / $ratingtotal['total'] * 100) : '0' ?>%"></div>
                                                                 </div>
                                                             </td>
                                                             <td class="fw-normal text-gray-700">
@@ -349,9 +341,7 @@ License: For each use you must have a valid license purchased only from above li
                                                                 <div class="h-8px mx-3 bg-gray-500 bg-opacity-50 rounded">
                                                                     <div class="bg-success rounded h-8px"
                                                                          role="progressbar"
-                                                                         style="<?php echo 'width : ' . ($rating1['total'] / $ratingtotal['total'] * 100) . '%;' ?>"
-                                                                         aria-valuenow="50" aria-valuemin="0"
-                                                                         aria-valuemax="100"></div>
+                                                                         style="width: <?php echo $rating1['total'] != '0' ? ($rating1['total'] / $ratingtotal['total'] * 100) : '0' ?>%"></div>
                                                                 </div>
                                                             </td>
                                                             <td class="fw-normal text-gray-700">
