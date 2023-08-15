@@ -338,12 +338,11 @@ License: For each use you must have a valid license purchased only from above li
                     var input = dateInputs[i];
                     var currentDate = new Date();
                     var minDate = currentDate.toISOString().split("T")[0];
-                    let someDate = new Date('<?= $data_jadwal['tgl_acara'] ?>');
-                    let numberOfDaysToAdd = -6;
+                    let someDate = new Date();
+                    let numberOfDaysToAdd = 7;
                     let result = someDate.setDate(someDate.getDate() + numberOfDaysToAdd);
                     let minDateF = new Date(result);
                     input.min = minDateF.toISOString().split("T")[0];
-                    input.max = '<?= $data_jadwal['tgl_acara'] ?>';
                     // input.addEventListener("input", disableSpecificDates);
                 }
             });

@@ -523,7 +523,7 @@ License: For each use you must have a valid license purchased only from above li
                 let currentDate = new Date();
                 let minDate = currentDate.toISOString().split("T")[0];
                 let someDate = new Date(minDate);
-                let numberOfDaysToAdd = 6;
+                let numberOfDaysToAdd = 7;
                 let result = someDate.setDate(someDate.getDate() + numberOfDaysToAdd);
                 let minDateF = new Date(result);
                 input.min = minDateF.toISOString().split("T")[0];
