@@ -34,6 +34,7 @@ if (isset($_POST['register'])) {
     } catch (Exception $e) {
         $tglLhr = $today;
     }
+    $tglKurang = $today->format('Y') - $tglLhr->format('Y');
 
     if ($nama === '') {
         echo "<script>alert('nama tidak boleh kosong');history.back();</script>";
@@ -64,11 +65,13 @@ if (isset($_POST['register'])) {
                                     } else
                                         if ($repeat_password != $password) {
                                             echo "<script>alert('password tidak sama');history.back();</script>";
-                                        }else if($tglLhr > $today){
+                                        } else if ($tglLhr > $today) {
                                             echo "<script>alert('Tanggal lahir tidak benar');history.back();</script>";
+                                        } else if ($tglKurang < 17) {
+                                            echo "<script>alert('Anda Belum 17 tahun');history.back();</script>";
                                         } else {
                                             $check = $db_connect->query("SELECT count(*) as count FROM user where username = '" . $username . "'")->fetch_assoc();
-                                            if($check['count'] > 0){
+                                            if ($check['count'] > 0) {
                                                 echo "<script>alert('username sudah terdaftar');history.back();</script>";
                                             } else {
 

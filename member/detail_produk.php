@@ -1,14 +1,19 @@
 <?php
+global $db_connect;
 require_once '../functions/member_service.php';
 require_once '../functions/general_service.php';
 if (!isset($_GET['produk'])) {
     header('location: index');
 }
-
+$xan = isset($_POST['gantiRating']) ? $_POST['gantiRating'] : '';
 $id_produk = $_GET['produk'];
 
 $produk = $db_connect->query("SELECT * FROM produk WHERE id = '$id_produk'")->fetch_assoc();
-$ratingdesc = $db_connect->query("SELECT a.*, b.nama, b.photo FROM rating as a LEFT JOIN user as b on a.id_user = b.id WHERE a.id_produk = '" . $produk['id'] . "'");
+if(!isset($_POST['gantiRating']) || $_POST['gantiRating'] === '0') {
+    $ratingdesc = $db_connect->query("SELECT a.*, b.nama, b.photo FROM rating as a LEFT JOIN user as b on a.id_user = b.id WHERE a.id_produk = '" . $produk['id']."'");
+}else{
+    $ratingdesc = $db_connect->query("SELECT a.*, b.nama, b.photo FROM rating as a LEFT JOIN user as b on a.id_user = b.id WHERE a.id_produk = '" . $produk['id'] . "' AND a.rating = '".$_POST['gantiRating']."'");
+}
 $rating = $db_connect->query("SELECT AVG(rating) AS rata_rata_rating FROM rating WHERE id_produk = '" . $produk['id'] . "'")->fetch_assoc();
 $ratingtotal = $db_connect->query("SELECT count(*) as total FROM rating WHERE id_produk = '" . $produk['id'] . "'")->fetch_assoc();
 $rating1 = $db_connect->query("SELECT count(*) as total FROM rating WHERE id_produk = '" . $produk['id'] . "' AND rating = '1'")->fetch_assoc();
@@ -352,6 +357,17 @@ License: For each use you must have a valid license purchased only from above li
                                                 </div>
                                             </div>
                                         </div>
+                                        <form action="" method="post">
+                                            <select class="form-select" id="gantiRating" aria-label="Select example"
+                                                    name="gantiRating" onchange="this.form.submit()">
+                                                <option <?= !isset($_POST['gantiRating']) ? 'selected' : '' ?> value="0">ALL</option>
+                                                <option <?= isset($_POST['gantiRating']) ? $_POST['gantiRating'] == '5' ? 'selected' : '' : '' ?> value="5">5</option>
+                                                <option <?= isset($_POST['gantiRating']) ? $_POST['gantiRating'] == '4' ? 'selected' : '' : '' ?> value="4">4</option>
+                                                <option <?= isset($_POST['gantiRating']) ? $_POST['gantiRating'] == '3' ? 'selected' : '' : '' ?> value="3">3</option>
+                                                <option <?= isset($_POST['gantiRating']) ? $_POST['gantiRating'] == '2' ? 'selected' : '' : '' ?> value="2">2</option>
+                                                <option <?= isset($_POST['gantiRating']) ? $_POST['gantiRating'] == '1' ? 'selected' : '' : '' ?> value="1">1</option>
+                                            </select>
+                                        </form>
                                         <div class="card-body bg-gray-300 max-h-100px overflow-auto">
                                             <div class="row">
                                                 <?php
