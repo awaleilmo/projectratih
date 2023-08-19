@@ -43,7 +43,7 @@ function hapus_kategori($id)
     return $db_connect->query("DELETE FROM jenis_produk WHERE id = $id") && $db_connect->query("DELETE FROM produk WHERE jenis_produk = $id");
 }
 
-function tambah_produk($paket, $deskripsi, $jenis_produk, $harga, $foto, $video)
+function tambah_produk($paket, $deskripsi, $jenis_produk, $inout,  $harga, $foto, $video)
 {
     global $db_connect;
 
@@ -84,10 +84,10 @@ function tambah_produk($paket, $deskripsi, $jenis_produk, $harga, $foto, $video)
         move_uploaded_file($video['tmp_name'], $targetPathvideo);
     }
 
-    return $db_connect->query("INSERT INTO produk (nama, deskripsi, harga, jenis_produk, photo, video) VALUES ('$paket', '$deskripsi', '$harga', '$jenis_produk','$newFileNameFoto','$newFileNamevideo')");
+    return $db_connect->query("INSERT INTO produk (nama, deskripsi, harga, jenis_produk, `inout`, photo, video) VALUES ('$paket', '$deskripsi', '$harga', '$jenis_produk', '$inout','$newFileNameFoto','$newFileNamevideo')");
 }
 
-function edit_produk($id, $paket, $deskripsi, $jenis_produk, $harga, $foto, $video, $edit_photo, $edit_video)
+function edit_produk($id, $paket, $deskripsi, $jenis_produk, $inout, $harga, $foto, $video, $edit_photo, $edit_video)
 {
     global $db_connect;
 
@@ -147,7 +147,7 @@ function edit_produk($id, $paket, $deskripsi, $jenis_produk, $harga, $foto, $vid
         $newFileNameVideo = $video;
     }
 
-    return $db_connect->query("UPDATE produk SET nama = '$paket', deskripsi = '$deskripsi', jenis_produk = '$jenis_produk', harga = '$harga', photo = '$newFileNameFoto', video = '$newFileNameVideo' WHERE id = '$id'");
+    return $db_connect->query("UPDATE produk SET nama = '$paket', deskripsi = '$deskripsi', jenis_produk = '$jenis_produk', `inout` = '$inout', harga = '$harga', photo = '$newFileNameFoto', video = '$newFileNameVideo' WHERE id = '$id'");
 }
 
 function hapus_produk($id)

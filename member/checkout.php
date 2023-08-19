@@ -79,7 +79,9 @@ if (isset($_POST['submit_pembayaran'])) {
 
         // proses insert detail produk pernjualan beserta tanggal nya
         for ($i = 0; $i < count($_POST['tgl_booking_product']); $i++) {
-            $db_connect->query("INSERT INTO detail_penjualan (`nomor_invoice`, `id_produk`, `tgl_acara`) VALUES ('$nomor_invoice', '" . $_POST['id_product'][$i] . "', '" . $_POST['tgl_booking_product'][$i] . "')");
+            $jams = $_POST['id_inout'] == 1 ? $_POST['jam_booking_product'][$i] : '';
+            $db_connect
+                ->query("INSERT INTO detail_penjualan (`nomor_invoice`, `id_produk`, `tgl_acara`, `jam_acara`) VALUES ('$nomor_invoice', '" . $_POST['id_product'][$i] . "', '" . $_POST['tgl_booking_product'][$i] . "', '" . $jams  . "')");
         }
 
         // proses insert payment penjualan
@@ -170,16 +172,16 @@ License: For each use you must have a valid license purchased only from above li
                 events: [
                     <?php foreach ($list_acara as $acara) : ?> {
                         id: '<?= $acara['id']; ?>',
-                        start: '<?= $acara['tgl_acara']; ?>',
-                        end: '<?= $acara['tgl_acara']; ?>',
+                        start: '<?= date($acara['tgl_acara']) ?>',
+                        end: '<?= date($acara['tgl_acara']) ?>',
                         title: !compareDate('<?= $acara['tgl_acara']; ?>') ? 'Sudah dibooking' : 'Selesai',
-                        color: !compareDate('<?= $acara['tgl_acara']; ?>') ? '#3788d8' : 'limegreen'
+                        color: !compareDate('<?= $acara['tgl_acara']; ?>') ? '#3788d8' : 'limegreen',
                     },
                     <?php endforeach; ?>
                 ]
             });
 
-            console.log(calendar);
+            console.log(<?= $list_acara->fetch_assoc()?>);
 
             calendar.render();
         });
@@ -366,23 +368,30 @@ License: For each use you must have a valid license purchased only from above li
                                                         ?>
                                                         <div class="mb-5">
                                                             <label class="required form-label">Tanggal Booking
-                                                                Paket <?= $produk['nama'] ?></label>
+                                                                Paket <?= $produk['nama'] ?> (
+                                                                <i><?= $produk['inout'] == 0 ? 'OUTDOOR' : 'INDOOR' ?></i>
+                                                                )</label>
                                                             <input id="dateID" type="date" name="tgl_booking_product[]"
                                                                    class="form-control form-control-solid date-input"
                                                                    placeholder="tanggal booking" required/>
-                                                            <input type="hidden" name="id_product[]"
-                                                                   class="form-control form-control-solid"
-                                                                   placeholder="ID Produk" value="<?= $produk['id'] ?>"
+                                                            <?php if ($produk['inout'] == 1) { ?>
+                                                                <input type="time" name="jam_booking_product[]"
+                                                                       class="form-control form-control-solid date-input"
+                                                                       placeholder="tanggal booking" required/>
+                                                            <?php } ?>
+                                                            <input type="hidden" name="id_product[]" value="<?= $produk['id'] ?>"
                                                                    required/>
-                                                            <input type="hidden" name="total_harga"
-                                                                   class="form-control form-control-solid"
-                                                                   placeholder="ID Produk" value="<?= $grand_total ?>"
+                                                            <input type="hidden" name="id_inout[]" value="<?= $produk['inout'] ?>"
+                                                                   required/>
+                                                            <input type="hidden" name="total_harga" value="<?= $grand_total ?>"
                                                                    required/>
                                                         </div>
                                                     <?php endforeach; ?>
                                                     <div class="mb-5">
                                                         <label class="form-label">DP</label>
-                                                        <select id="changeDP" class="form-select" onchange="gantidp(<?= $grand_total ?>)" aria-label="Select example">
+                                                        <select id="changeDP" class="form-select"
+                                                                onchange="gantidp(<?= $grand_total ?>)"
+                                                                aria-label="Select example">
                                                             <option value="0">0 %</option>
                                                             <option value="50">50 %</option>
                                                             <option value="70">70 %</option>

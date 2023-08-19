@@ -1,4 +1,5 @@
 <?php
+global $db_connect;
 require_once '../functions/admin_service.php';
 
 if (!isset($_GET['paket'])) {
@@ -19,11 +20,12 @@ if (isset($_POST['save'])) {
     $jenis_paket = mysqli_real_escape_string($db_connect, $_POST['jenis_produk']);
     $harga = mysqli_real_escape_string($db_connect, $_POST['harga']);
     $foto = $editPhoto ? $_FILES['foto'] : $data['photo'];
+    $inout = $_POST['inout'];
     $video = $editVideo ? $_FILES['video'] : $data['video'];
     $edit_photo = $editPhoto ? $_POST['editPhoto'] : false;
     $edit_video = $editVideo ? $_POST['editVideo'] : false;
 
-    if (edit_produk($id, $paket, $deskripsi, $jenis_paket, $harga, $foto, $video, $edit_photo, $edit_video)) {
+    if (edit_produk($id, $paket, $deskripsi, $jenis_paket, $inout, $harga, $foto, $video, $edit_photo, $edit_video)) {
         $_SESSION['action_ed'] = 1;
         $_SESSION['edit_data'] = 1;
         $_SESSION['message_data'] = "Data berhasil diubah";
@@ -221,6 +223,20 @@ License: For each use you must have a valid license purchased only from above li
                                                         <?php foreach ($daftar_jenis_produk as $jenis_produk) : ?>
                                                             <option value="<?= $jenis_produk['id'] ?>" <?= $jenis_produk['id'] == $data['jenis_produk'] ? 'selected' : ''; ?>><?= $jenis_produk['jenis_produk'] ?></option>
                                                         <?php endforeach; ?>
+                                                    </select>
+                                                </div>
+                                                <!--end::Col-->
+                                            </div>
+                                            <!--end::Input group-->
+                                            <!--begin::Input group-->
+                                            <div class="row g-9 mb-8">
+                                                <!--begin::Col-->
+                                                <div class="col-md-12 fv-row">
+                                                    <label class="required fs-6 fw-semibold mb-2">In Door / Out Door</label>
+                                                    <select class="form-select form-select-solid" data-control="select2"
+                                                            data-hide-search="true" name="inout" required>
+                                                        <option <?= $data['inout'] == 0 ? 'selected' : ''; ?> value="0">Out Door</option>
+                                                        <option <?= $data['inout'] == 1 ? 'selected' : ''; ?>  value="1">In Door</option>
                                                     </select>
                                                 </div>
                                                 <!--end::Col-->

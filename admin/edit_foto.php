@@ -1,4 +1,5 @@
 <?php
+global $db_connect;
 require_once '../functions/admin_service.php';
 
 if (!isset($_GET['id'])) {

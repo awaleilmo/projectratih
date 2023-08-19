@@ -157,7 +157,7 @@ License: For each use you must have a valid license purchased only from above li
                                 <div class="col-8">
                                     <div class="card shadow-sm mt-5">
                                         <div class="card-body">
-                                            <h1><?= $produk['nama'] ?></h1>
+                                            <h1><?= $produk['nama'] ?> ( <i class="fs-sm-1"><?= $produk['inout'] == 0 ? 'OUTDOOR' : 'INDOOR' ?></i> )</h1>
                                             <p><?= $db_connect->query("SELECT * FROM jenis_produk WHERE id = '" . $produk['jenis_produk'] . "'")->fetch_assoc()['jenis_produk'] ?></p>
                                             <p>
                                                 <?php
