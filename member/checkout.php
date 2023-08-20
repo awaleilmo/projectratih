@@ -79,9 +79,9 @@ if (isset($_POST['submit_pembayaran'])) {
 
         // proses insert detail produk pernjualan beserta tanggal nya
         for ($i = 0; $i < count($_POST['tgl_booking_product']); $i++) {
-            $jams = $_POST['id_inout'] == 1 ? $_POST['jam_booking_product'][$i] : '';
+            $jams = $_POST['jam_booking_product'][$i];
             $db_connect
-                ->query("INSERT INTO detail_penjualan (`nomor_invoice`, `id_produk`, `tgl_acara`, `jam_acara`) VALUES ('$nomor_invoice', '" . $_POST['id_product'][$i] . "', '" . $_POST['tgl_booking_product'][$i] . "', '" . $jams  . "')");
+                ->query("INSERT INTO detail_penjualan (`nomor_invoice`, `id_produk`, `tgl_acara`, `jam_acara`) VALUES ('$nomor_invoice', '" . $_POST['id_product'][$i] . "', '" . $_POST['tgl_booking_product'][$i] . "', '" . $jams . "')");
         }
 
         // proses insert payment penjualan
@@ -374,16 +374,18 @@ License: For each use you must have a valid license purchased only from above li
                                                             <input id="dateID" type="date" name="tgl_booking_product[]"
                                                                    class="form-control form-control-solid date-input"
                                                                    placeholder="tanggal booking" required/>
-                                                            <?php if ($produk['inout'] == 1) { ?>
-                                                                <input type="time" name="jam_booking_product[]"
-                                                                       class="form-control form-control-solid date-input"
-                                                                       placeholder="tanggal booking" required/>
-                                                            <?php } ?>
-                                                            <input type="hidden" name="id_product[]" value="<?= $produk['id'] ?>"
+                                                            <input type="time" name="jam_booking_product[]"
+                                                                   class="form-control form-control-solid date-input <?= $produk['inout'] == 0 ? 'd-none' : '' ?>"
+                                                                   placeholder="tanggal booking" required
+                                                                   value="00:00"/>
+                                                            <input type="hidden" name="id_product[]"
+                                                                   value="<?= $produk['id'] ?>"
                                                                    required/>
-                                                            <input type="hidden" name="id_inout[]" value="<?= $produk['inout'] ?>"
+                                                            <input type="hidden" name="id_inout[]"
+                                                                   value="<?= $produk['inout'] ?>"
                                                                    required/>
-                                                            <input type="hidden" name="total_harga" value="<?= $grand_total ?>"
+                                                            <input type="hidden" name="total_harga"
+                                                                   value="<?= $grand_total ?>"
                                                                    required/>
                                                         </div>
                                                     <?php endforeach; ?>
